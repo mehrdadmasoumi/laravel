@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'btitr';
+    src: url('BTitrBold.eot'); /* IE9 Compat Modes */
+    src: url('BTitrBold.eot?#') format('eot'), /* IE6–8 */
+    url('BTitrBold.ttf') format('truetype'), /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+    url('BTitrBold.woff') format('woff'); /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    font-variant: normal;
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'dinar';
+    src: url('dinar.eot'); /* IE9 Compat Modes */
+    src: url('dinar.eot?#') format('eot'), /* IE6–8 */
+    url('dinar.ttf') format('truetype'), /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+    url('dinar.woff') format('woff'); /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    font-variant: normal;
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'bnazanin';
+    src: url('BNazanin.eot'); /* IE9 Compat Modes */
+    src: url('BNazanin.eot?#') format('eot'), /* IE6–8 */
+    url('BNazanin.ttf') format('truetype'), /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+    url('BNazanin.woff') format('woff'); /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    font-variant: normal;
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'byekan';
+    src: url('byekan-webfont.eot'); /* IE9 Compat Modes */
+    src: url('byekan-webfont.eot?#') format('eot'), /* IE6–8 */
+    url('byekan-webfont.ttf') format('truetype'), /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+    url('byekan-webfont.woff') format('woff'); /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+    font-variant: normal;
+    font-weight: normal;
+    font-style: normal;
+}
