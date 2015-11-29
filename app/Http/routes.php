@@ -1,5 +1,6 @@
 <?php
-use Illuminate\Support\Facades\App as App;
+
+use Illuminate\Support\Facades\App AS App;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -11,34 +12,36 @@ use Illuminate\Support\Facades\App as App;
 |
 */
 
-// set locale
 $locale = Request::segment(1);
 if (in_array($locale, Config::get('app.locales'))) {
     App::setLocale($locale);
-    $lang = $locale ;
+    Config::set('app.localization', $locale);
+} else if (Request::get('lang') && in_array(Request::get('lang'), Config::get('app.locales'))) {
+    App::setLocale(Request::get('lang'));
+    $locale = null;
 } else {
-    $locale = App::getLocale();
-    $lang = null ;
+    $locale = null;
 }
-// set dir pages
-$dir = ($locale == 'fa') ? 'rtl' : 'ltr';
+
+$dir = (App::getLocale() == 'fa') ? 'rtl' : 'ltr';
 Config::set('app.dir', $dir);
 
-// base routes
-Route::group(['prefix' => $lang ], function()
-{
-    include_once(__DIR__.'/Controllers/Base/Route/base.php');
-});
-
-// admin routes
-Route::group(['prefix' => $lang.'/Admin'], function(){
-
-    // admin route
-    include_once(__DIR__.'/Controllers/Admin/Route/admin.php');
-
-    // config route
-    include_once(__DIR__.'/Controllers/Config/Route/config.php');
-
-    // content route
-    include_once(__DIR__ . '/Controllers/Content/Route/admin.php');
+Route::group(array('prefix' => $locale), function () {
+    $prefixes = Config::get('app.prefixes');
+    foreach ($prefixes as $prefix) {
+        Route::group(array('prefix' => $prefix, 'namespace' => studly_case($prefix)), function () use ($prefix) {
+            // for prefix route example ^/admin or ^/user or ^/agent
+            Route::get('/', function() use ($prefix) {
+                return Lib::callAction('', $prefix);
+            });
+            // for other route in namespace example ^/admin/content/store/{args}/?getParams
+            Route::any('{controller?}/{action?}/{args?}', function ($controller, $action = 'index', $args = '') use($prefix) {
+                return Lib::callAction($prefix, $controller, $action, $args);
+            })->where(array(
+                'controller' => '[^/]+',
+                'action'     => '[^/]+',
+                'args'       => '[^?$]+'
+            ));
+        });
+    }
 });

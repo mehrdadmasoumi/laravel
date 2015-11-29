@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Content\Admin;
 
 use App\Http\Controllers\Content\Model\Content;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 
 class ContentController extends Controller
 {
@@ -15,10 +16,8 @@ class ContentController extends Controller
      *
      * @return Response
      */
-    public function index(Request $request)
+    public function index()
     {
-
-
        return view('content.admin.index');
     }
 
@@ -29,7 +28,14 @@ class ContentController extends Controller
      */
     public function create()
     {
-        //
+        $id = Input::get('id');
+        if($id) {
+            $entity = Content::findOrNew($id);
+            $view = view('content.admin.create',with(array('entity' => $entity)));
+        } else {
+            $view = view('content.admin.create');
+        }
+        die($view);
     }
 
     /**
@@ -40,7 +46,9 @@ class ContentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+       $entity = new Content();
+        return redirect(route('admin_content'));
     }
 
     /**
@@ -51,18 +59,7 @@ class ContentController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
+        dd($id);
     }
 
     /**
@@ -85,6 +82,6 @@ class ContentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Content::destroy($id);
     }
 }

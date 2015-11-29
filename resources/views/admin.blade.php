@@ -37,7 +37,7 @@
     <aside>@include('admin.fix.sidebar')</aside>
     <section id="main-content">
         <section class="wrapper">
-            <div id="inner">
+            <div id="admin-content">
                 <div class="row">
                     <div class="col-xs-12">
                         @yield('content')
@@ -62,6 +62,8 @@
     @else
         <script src="{{ asset('assets/admin/js/ltr/common-scripts.js') }}"></script>
     @endif
+    <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
+    <script src="{{ asset('assets/admin/js/admin.js') }}"></script>
     <script>
         $(window).on("resize load",function(event){
             var wSize = $(window).width();
